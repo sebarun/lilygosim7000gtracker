@@ -1,5 +1,4 @@
 #include "power.h"
-#include "logger.h"
 #include <Arduino.h>
 #include <esp_sleep.h>
 
