@@ -7,6 +7,7 @@
 #include "network.h"
 #include "storage.h"
 #include "battery.h"
+
 void setup(){
   Serial.begin(115200);
   
@@ -20,7 +21,8 @@ void setup(){
   
   // 2. Despertar el módem
   powerOnModem();
-  
+
+  // ---> AQUÍ IRA LA COMUNICACIÓN CON EL MODEM (Paso siguiente) <---
   // 3. Ejecutar las tareas del rastreador
   handleSMS();
   
