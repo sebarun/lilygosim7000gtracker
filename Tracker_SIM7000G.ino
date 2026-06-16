@@ -24,12 +24,7 @@
 TinyGsm modem(SerialAT);
 
 void setup(){
-  SerialMon.begin(UART_BAUD);
-  delay(3000);
-  SerialMon.println("Iniciando SIM7000G...");
-  Serial.begin(115200);
-  pinMode(RELAY_PIN, OUTPUT);
-  digitalWrite(RELAY_PIN, LOW);
+  
     // Inicializar módem
   SerialAT.begin(9600, SERIAL_8N1, PIN_RX, PIN_TX);
   delay(600);
