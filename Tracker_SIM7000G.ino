@@ -13,6 +13,9 @@
 #include "network.h"
 #include "storage.h"
 #include "battery.h"
+#include <Wire.h>
+#include <Adafruit_LIS3DH.h>
+#include <Adafruit_Sensor.h>
 
 TinyGsm modem(SerialAT);
 
