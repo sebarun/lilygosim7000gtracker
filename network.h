@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 
 bool networkInit();
 bool networkConnect();
