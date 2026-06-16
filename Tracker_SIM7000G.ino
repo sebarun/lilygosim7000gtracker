@@ -22,9 +22,17 @@ void setup(){
   // 2. Despertar el módem
   powerOnModem();
 
-  // ---> AQUÍ IRA LA COMUNICACIÓN CON EL MODEM (Paso siguiente) <---
-  // 3. Ejecutar las tareas del rastreador
-  handleSMS();
+  // 3. Inicializar comunicación y red
+  if (networkInit()) {
+      
+      // Mantenemos tu lógica original de SMS que incluye pedir el GPS
+      handleSMS();
+      
+      if (networkConnect()) {
+          // Aquí enviaremos los datos vía GPRS más adelante
+          networkDisconnect(); 
+      }
+  }
   
   // 4. Apagar el módem para no gastar batería durante el sueño
   powerOffModem();
