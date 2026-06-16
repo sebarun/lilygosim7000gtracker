@@ -27,7 +27,7 @@ void setup(){
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, LOW);
   // 1. Inicializar placa y periféricos
-  initMQTT();
+  
   initSD();
   // 2. Inicializar Acelerómetro y configurarlo para despertar al ESP32
   motionInit();
@@ -38,7 +38,8 @@ void setup(){
   delay(2000);
   DBG("=== BOOT TRACKER PROFESIONAL ===");
   powerOnModem();
-    // Inicializar módem
+  initMQTT();
+  // Inicializar módem
   DBG("Iniciando comunicacion AT con SIM7000G...");
   SerialAT.begin(UART_BAUD, SERIAL_8N1, PIN_RX, PIN_TX);
   delay(3000); // Dar tiempo al puerto serie
