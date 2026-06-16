@@ -17,6 +17,10 @@
 #include <Adafruit_LIS3DH.h>
 #include <Adafruit_Sensor.h>
 
+// --- PINES DEL LIS3DH Y RELÉ ---
+#define RELAY_PIN_SAFE      13
+#define PIN_MOTION          32 // Conectado a INT1 del LIS3DH (Pin RTC)
+
 TinyGsm modem(SerialAT);
 
 void setup(){
