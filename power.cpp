@@ -1,6 +1,8 @@
 #include "power.h"
 #include <Arduino.h>
 #include <esp_sleep.h>
+#include "config.h"
+#include "debug.h"
 
 #define SIM7000_PWRKEY_PIN 33
 
@@ -42,8 +44,7 @@ void powerOffModem() {
 
 void enterDeepSleep() {
     DBG("Entrando en Deep Sleep...");
-    // NOTA: Actualmente lo tienes en 5 segundos (5000000 microsegundos).
-    // Para un tracker real, esto suele ser mucho mayor (ej. 3 a 5 minutos).
-    esp_sleep_enable_timer_wakeup(5000000); 
+    // Usamos el intervalo definido en config.h convertido a microsegundos
+    esp_sleep_enable_timer_wakeup((uint64_t)TRACKER_INTERVAL * 1000); 
     esp_deep_sleep_start();
 }

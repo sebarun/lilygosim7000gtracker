@@ -22,6 +22,10 @@
 #define RELAY_PIN 23
 #define SD_CS      5
 
+// I2C (OLED y Acelerómetro)
+#define OLED_SDA   21
+#define OLED_SCL   22
+
 // ADC
 #define BAT_ADC   35
 #define SOLAR_ADC 34

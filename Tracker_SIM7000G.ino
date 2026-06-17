@@ -9,6 +9,7 @@
 #include "sdLogger.h"
 #include "iotClient.h"
 #include "motion.h"
+#include "display.h"
 //#include <Wire.h>
 //#include <Adafruit_LIS3DH.h>
 //#include <Adafruit_Sensor.h>
@@ -36,6 +37,7 @@ void setup(){
   powerInit();
   SerialMon.begin(UART_BAUD);
   delay(2000);
+  initDisplay();
   DBG("=== BOOT TRACKER PROFESIONAL ===");
   powerOnModem();
   initMQTT();
@@ -53,6 +55,7 @@ void setup(){
     modem.simUnlock(GSM_PIN);
   }
   // 6. Conexión a la red Celular
+  displayMessage("Buscando red celular...");
   DBG("Esperando red...");
   if (!modem.waitForNetwork()) {
     DBG("Error: no hay red");
@@ -60,17 +63,17 @@ void setup(){
     ESP.restart(); // Si no hay red, reiniciamos el sistema completo
   }
   DBG("Red celular conectada.");
+  displayMessage("Red conectada", "Conectando GPRS...");
   
   // 7. Conexión a Internet (GPRS)
   DBG("Conectando GPRS...");
   modem.gprsConnect(apn, gprsUser, gprsPass);
   if (modem.isGprsConnected()) {
     DBG("GPRS conectado exitosamente.");
+    displayStatus("GPRS OK", "Esperando GPS");
   }
   // Encender GPS interno
   modem.enableGPS();
-}
-  
 
 
   // 3. Inicializar comunicación y red
@@ -80,7 +83,9 @@ void setup(){
           // 5. Obtener GPS y enviar datos
           modem.enableGPS();
           DBG("Intentando obtener fix GPS...")
+          displayStatus("GPRS OK", "Buscando GPS...");
           if (getGPSFix()) {
+              displayStatus("GPRS OK", "GPS OK");
               logToSD(lati, longi);
               enviarMQTT(lati, longi);
               DBG("Datos enviados correctamente.");
@@ -101,6 +106,7 @@ void setup(){
 
   // 5. Dormir el ESP32
   DBG("Entrando en Deep Sleep esperando movimiento..."); 
+  displayClear();
   enterDeepSleep();
 }
 void loop(){
