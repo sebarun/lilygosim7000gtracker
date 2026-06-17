@@ -4,7 +4,7 @@
 #include "powerMonitor.h"
 #include "debug.h"
 
-#define SMS_TARGET "+34656610040"
+#define SMS_TARGET "+34625864654"
 
 extern TinyGsm modem;
 extern bool relayState;

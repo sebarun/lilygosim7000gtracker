@@ -10,9 +10,6 @@
 #include "iotClient.h"
 #include "motion.h"
 #include "display.h"
-//#include <Wire.h>
-//#include <Adafruit_LIS3DH.h>
-//#include <Adafruit_Sensor.h>
 
 // --- PINES DEL LIS3DH Y RELÉ ---
 #define RELAY_PIN_SAFE      13
@@ -72,17 +69,12 @@ void setup(){
     DBG("GPRS conectado exitosamente.");
     displayStatus("GPRS OK", "Esperando GPS");
   }
-  // Encender GPS interno
-  modem.enableGPS();
-
-
   // 3. Inicializar comunicación y red
   if (networkInit()) {
       if (networkConnect()) {
           initMQTT(); // Preparamos MQTT ya que hay internet
           // 5. Obtener GPS y enviar datos
-          modem.enableGPS();
-          DBG("Intentando obtener fix GPS...")
+          DBG("Intentando obtener fix GPS...");
           displayStatus("GPRS OK", "Buscando GPS...");
           if (getGPSFix()) {
               displayStatus("GPRS OK", "GPS OK");
@@ -92,7 +84,6 @@ void setup(){
           } else {
               DBG("No se pudo obtener fix GPS en este ciclo.");
           }
-          modem.disableGPS();
           // 6. Revisamos si hay comandos SMS pendientes antes de dormir
           procesarSMS();
         
