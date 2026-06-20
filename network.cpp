@@ -36,7 +36,7 @@ bool networkInit() {
         modem.simUnlock(GSM_PIN);
     }
     String modemInfo = modem.getModemInfo();
-    DBG("Modem Info: " + modemInfo);
+    DBG("Modem Info: %s", modemInfo.c_str());
     return true;
 }
 
@@ -50,7 +50,7 @@ bool networkConnect() {
     DBG("Registrado en la red celular con exito.");
 
     // Usamos el APN_FI que tienes en tu config.h (sin usuario ni contraseña)
-    DBG(String("Conectando a GPRS con APN: ") + apn);
+    DBG("Conectando a GPRS con APN: %s", apn);
     if (!modem.gprsConnect(apn, gprsUser, gprsPass)) {
         DBG("ERROR: Fallo al levantar sesion GPRS.");
         return false;
@@ -68,5 +68,5 @@ void networkDisconnect() {
 
 void sendTeltonika(float la, float lo, float sp) {
     // Por ahora mantenemos tu lógica original, luego implementaremos el envío TCP
-    DBG("AVL (Teltonika) " + String(la));
+    DBG("AVL (Teltonika) %s", String(la).c_str());
 }

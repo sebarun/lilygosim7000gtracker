@@ -21,6 +21,7 @@
 #define LED_PIN   12
 #define RELAY_PIN 23
 #define SD_CS      5
+#define PIN_MOTION 32
 
 // I2C (OLED y Acelerómetro)
 #define OLED_SDA   21
